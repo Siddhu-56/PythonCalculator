@@ -21,3 +21,5 @@ if __name__ == "__main__":
     print("Subtraction:", subtract(10, 5))
     print("Multiplication:", multiply(10, 5))
     print("Division:", divide(10, 5))
+
+    input("\nPress Enter to close...")

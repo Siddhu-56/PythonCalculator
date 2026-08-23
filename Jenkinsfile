@@ -1,48 +1,46 @@
 pipeline {
     agent any
 
-    stages {
+    environment {
+        PYTHON_EXE = 'C:\\Users\\SIDDU\\AppData\\Local\\Programs\\Python\\Python314\\python.exe'
+    }
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    stages {
 
         stage('Verify Python') {
             steps {
-                bat 'python --version'
-                bat 'python -m pip --version'
+                bat '"%PYTHON_EXE%" --version'
+                bat '"%PYTHON_EXE%" -m pip --version'
             }
         }
 
         stage('Upgrade pip') {
             steps {
-                bat 'python -m pip install --upgrade pip'
+                bat '"%PYTHON_EXE%" -m pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"%PYTHON_EXE%" -m pip install -r requirements.txt'
             }
         }
 
         stage('Install PyInstaller') {
             steps {
-                bat 'python -m pip install pyinstaller'
+                bat '"%PYTHON_EXE%" -m pip install pyinstaller'
             }
         }
 
         stage('Run Unit Tests') {
             steps {
-                bat 'python -m unittest discover -v'
+                bat '"%PYTHON_EXE%" -m unittest discover -v'
             }
         }
 
         stage('Create EXE') {
             steps {
-                bat 'python -m PyInstaller --clean --onefile calculator.py'
+                bat '"%PYTHON_EXE%" -m PyInstaller --clean --onefile calculator.py'
             }
         }
 
